@@ -1,4 +1,3 @@
-"use client";
 import React, { useEffect, useRef, useState } from "react";
 import Input from "../components/Input";
 import SendButton from "../components/SendButton";
@@ -39,7 +38,7 @@ export default function CodeGeneration() {
     setPrompt("");
 
     try {
-      const response = await fetch("http://localhost:5000/getCode", {
+      const response = await fetch("https://genius-mern.vercel.app/getCode", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -67,7 +66,7 @@ export default function CodeGeneration() {
   };
   const fetchChats = async () => {
     try {
-      const response = await fetch("http://localhost:5000/getChats", {
+      const response = await fetch("https://genius-mern.vercel.app/getChats", {
         method: "GET",
       });
 

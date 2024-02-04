@@ -5,10 +5,16 @@ const cors = require("cors");
 const Chats = require("./Schema");
 const mongoose = require("mongoose");
 app.use(express.json());
-app.use(cors());
+app.use(cors(
+ {
+ origin:["https://genius-mern-frontend.vercel.app"],
+ methods:["POST","GET"],
+ credentials:true
+ }
+ ));
 
 mongoose.connect(
-  "mongodb+srv://tushar:tushar@cluster0.l7hsodg.mongodb.net/knit"
+ process.env.DB_URL
 );
 
 app.get("/getChats",async(req,res)=>{
@@ -23,9 +29,7 @@ app.post("/getCode", async (req, res) => {
 
     const apiUrl = "https://api.getknit.ai/v1/router/run";
 
-    const authToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiMTA3NzQzMzMxMDI1MjczMDIyODgyIn0sImlhdCI6MTcwNjgwMzA0NywiZXhwIjoxNzA3ODgzMDQ3fQ.6BRfMFJIrdMVZAcTuQCZItdpD9ulHGBbX1TQ1R3_-Ww";
-
+    const authToken = process.env.KNIT_API_KEY
     const requestData = {
       messages: [
         {
@@ -86,7 +90,7 @@ app.post("/getCode", async (req, res) => {
 
 app.post("/getImage", async (req, res) => {
   const { prompt } = req.body;
-  const apiKey = "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";
+  const apiKey = process.env.OPENAI_API_KEY
   const openai = new OpenAI({
     apiKey: apiKey,
     dangerouslyAllowBrowser: true,
