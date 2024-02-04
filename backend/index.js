@@ -4,9 +4,9 @@ const app = express();
 const cors = require("cors");
 const Chats = require("./Schema");
 const mongoose = require("mongoose");
-app.use(express.json());
-app.options("*", cors());
 
+app.options("*", cors());
+app.use(express.json());
 mongoose.connect(
  process.env.DB_URL
 );
