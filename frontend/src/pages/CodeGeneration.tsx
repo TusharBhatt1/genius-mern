@@ -39,7 +39,7 @@ export default function CodeGeneration() {
     setPrompt("");
 
     try {
-      const response = await fetch("http://localhost:5000/getCode", {
+      const response = await fetch("https://genius-mern.vercel.app/getCode", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
