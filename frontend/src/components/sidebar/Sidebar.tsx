@@ -52,7 +52,7 @@ export default function Sidebar() {
                 href={"/"}
               />
               <SideMenu
-                label="Text Generation"
+                label="Code Generation"
                 icon={<BiCode size={18} />}
                 color={"pink-400"}
                 href={"/code"}
