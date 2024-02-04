@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(cors());
 
 mongoose.connect(
-  "mongodb+srv://tushar:tushar@cluster0.l7hsodg.mongodb.net/knit"
+ process.env.DB_URL
 );
 
 app.get("/getChats",async(req,res)=>{
