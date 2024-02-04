@@ -6,7 +6,6 @@ const Chats = require("./Schema");
 const mongoose = require("mongoose");
 
 app.use(cors())
-
 app.use(express.json());
 mongoose.connect(
  process.env.DB_URL
