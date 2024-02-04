@@ -15,8 +15,8 @@ export default function Home() {
         <div className="flex items-center">
           <div className="flex flex-col gap-7 md:gap-20">
             <p className="text-lg">
-              <span className="text-2xl font-bold">Genius </span> an AI-powered
-              app built with MERN Stack.
+              <span className="text-2xl font-bold">Genius </span> an AI-powered Full Stack
+              web application built with MERN Stack.
             </p>
             <Intro />
             <div className="flex gap-2 items-center text-blue-700 font-bold">
