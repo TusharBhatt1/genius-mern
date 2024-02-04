@@ -122,7 +122,7 @@ app.post("/getImage", async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 });
-app.post("/", (req, res) => {
+app.get("/", (req, res) => {
   res.send("TEST");
 });
 
