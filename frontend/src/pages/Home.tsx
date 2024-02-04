@@ -34,7 +34,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-7 text-center">
+          <div className=" hidden sm:grid grid-cols-2 gap-7 text-center">
             <div className="flex items-center gap-2 text-green-500 shadow-md p-3 md:p-7 rounded-lg">
               <FaBrain size={20} />
               <span className="font-bold">Smart Answers</span>
