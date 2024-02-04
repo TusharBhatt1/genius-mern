@@ -96,14 +96,14 @@ export default function Page() {
   return (
     <form onSubmit={handleSend}>
       <div className="flex flex-col  justify-between h-full w-[100vw] md:w-[80vw] py-7 p-5">
-        <p className="flex items-center  gap-2 text-slate-400">
-          <img src={logo} height={18} width={18} alt="Genius" />
-          Get any image with just a prompt !
-        </p>
         <div
           ref={chatContainerRef}
           className="w-full max-h-[70vh] overflow-y-auto"
         >
+          <p className="flex items-center  gap-2 text-slate-400">
+            <img src={logo} height={18} width={18} alt="Genius" />
+            Get any image with just a prompt !
+          </p>
           <Chat chats={chats} isText={false} />
           <Processing isProcessing={isProcessing} isError={isError} />
         </div>
