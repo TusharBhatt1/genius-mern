@@ -38,7 +38,7 @@ export default function Page() {
     setPrompt("");
 
     try {
-      const response = await fetch("http://localhost:5000/getImage", {
+      const response = await fetch("https://genius-mern.vercel.app/getImage", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
