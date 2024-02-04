@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 app.use(express.json());
 app.use(cors(
  {
- origin:["https://genius-mern-frontend.vercel.app/"],
+ origin:["https://genius-mern-frontend.vercel.app"],
  methods:["POST","GET"],
  credentials:true
  }
