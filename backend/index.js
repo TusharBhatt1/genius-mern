@@ -6,6 +6,7 @@ const Chats = require("./Schema");
 const mongoose = require("mongoose");
 
 app.use(cors())
+
 app.use(express.json());
 mongoose.connect(
  process.env.DB_URL
@@ -121,7 +122,7 @@ app.post("/getImage", async (req, res) => {
     return res.status(500).json({ error: error.message });
   }
 });
-app.post("/", (req, res) => {
+app.get("/", (req, res) => {
   res.send("TEST");
 });
 
