@@ -38,7 +38,7 @@ export default function CodeGeneration() {
     setPrompt("");
 
     try {
-      const response = await fetch("https://genius-mern-backend.vercel.app/getCode", {
+      const response = await fetch("https://genius-mern-be.vercel.app/getCode", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -66,7 +66,7 @@ export default function CodeGeneration() {
   };
   const fetchChats = async () => {
     try {
-      const response = await fetch("https://genius-mern-backend.vercel.app/getChats", {
+      const response = await fetch("https://genius-mern-be.vercel.app/getChats", {
         method: "GET",
       });
 
