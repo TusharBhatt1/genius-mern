@@ -65,7 +65,7 @@ export default function Page() {
   };
   const fetchChats = async () => {
     try {
-      const response = await fetch(https://genius-mern.vercel.app/getChats", {
+      const response = await fetch("https://genius-mern.vercel.app/getChats", {
         method: "GET",
       });
 
