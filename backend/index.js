@@ -5,7 +5,11 @@ const cors = require("cors");
 const Chats = require("./Schema");
 const mongoose = require("mongoose");
 
-app.use(cors())
+app.use(cors({
+ origin:["https://genius-mern-fe.vercel.app"],
+ methods:["POST","GET"],
+ credentials:true
+}))
 
 app.use(express.json());
 mongoose.connect(
