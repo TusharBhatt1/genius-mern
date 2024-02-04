@@ -38,7 +38,7 @@ export default function Page() {
     setPrompt("");
 
     try {
-      const response = await fetch("https://genius-mern-be.vercel.app/getImage", {
+      const response = await fetch("https://genius-be.onrender.com/getImage", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -65,7 +65,7 @@ export default function Page() {
   };
   const fetchChats = async () => {
     try {
-      const response = await fetch("https://genius-mern-be.vercel.app/getChats", {
+      const response = await fetch("https://genius-be.onrender.com/getChats", {
         method: "GET",
       });
 

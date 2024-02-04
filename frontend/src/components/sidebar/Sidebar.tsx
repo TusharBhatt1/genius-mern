@@ -1,4 +1,3 @@
-"use client";
 import { useState } from "react";
 import SideMenu from "./SideMenu";
 import { CiHome } from "react-icons/ci";
