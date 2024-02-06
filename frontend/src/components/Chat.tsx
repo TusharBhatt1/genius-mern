@@ -38,9 +38,9 @@ export default function Chat({
               (isText ? (
                 <div className="flex w-full gap-2 items-start">
                   <img src={logo} height={18} width={18} alt="Genius" />
-                  <p className="flex flex-col gap-2">
+                  <p className="flex w-full flex-col gap-2">
                     <span className="bg-slate-100 w-full p-2 flex flex-wrap rounded-xl mr-4 px-2">
-                      <Markdown className="max-w-[82vw] overflow-x-auto flex flex-col gap-1">{chat.genius}</Markdown>
+                      <Markdown className="max-w-[82vw] overflow-x-auto gap-1">{chat.genius}</Markdown>
                     </span>
 
                     <CopyText
