@@ -104,7 +104,7 @@ export default function CodeGeneration() {
           <span> Generate or Translate code to another language</span>
           {isFetchingChats && (
             <span className="animate-spin">
-              <CgSpinnerTwoAlt />
+              <CgSpinnerTwoAlt size={18} />
             </span>
           )}
         </div>

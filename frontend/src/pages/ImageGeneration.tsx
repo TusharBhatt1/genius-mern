@@ -107,7 +107,7 @@ export default function Page() {
             <span> Get any image with just a prompt</span>
             {isFetchingChats && (
               <span className="animate-spin">
-                <CgSpinnerTwoAlt />
+                <CgSpinnerTwoAlt size={18} />
               </span>
             )}
           </div>
