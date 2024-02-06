@@ -98,7 +98,7 @@ export default function CodeGeneration() {
 
   return (
     <form onSubmit={handleSend}>
-      <div className="flex flex-col  justify-between h-full w-[100vw] md:w-[80vw] p-5 py-7">
+      <div className="flex flex-col  justify-between h-[90vh] overflow-hidden w-[100vw] md:w-[80vw] p-5 py-7">
         <div className="flex items-center  gap-2 text-slate-400">
           <img src={logo} height={18} width={18} alt="Genius" />
           <span> Generate or Translate code </span>
@@ -110,7 +110,7 @@ export default function CodeGeneration() {
         </div>
         <div
           ref={chatContainerRef}
-          className="w-[100vw]  max-h-[70vh] overflow-y-auto p-1 md:p-0"
+          className="w-[100vw] md:w-full  max-h-[70vh] overflow-y-auto p-1 md:p-0"
         >
           <Chat
             chats={allChats.codeChats}
