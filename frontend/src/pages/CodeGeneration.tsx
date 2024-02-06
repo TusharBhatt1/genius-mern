@@ -110,7 +110,7 @@ export default function CodeGeneration() {
         </div>
         <div
           ref={chatContainerRef}
-          className="w-full flex flex-col flex-wrap max-h-[70vh] overflow-y-auto p-1 md:p-0"
+          className="w-[100vw]  max-h-[70vh] overflow-y-auto p-1 md:p-0"
         >
           <Chat
             chats={allChats.codeChats}
