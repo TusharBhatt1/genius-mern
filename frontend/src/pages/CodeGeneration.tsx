@@ -4,6 +4,7 @@ import SendButton from "../components/SendButton";
 import logo from "../assets/logo.png";
 import Processing from "../components/Processing";
 import Chat from "../components/Chat";
+import { CgSpinnerTwoAlt } from "react-icons/cg";
 
 export interface ChatProps {
   user: string | null;
@@ -13,6 +14,7 @@ export interface ChatProps {
 export default function CodeGeneration() {
   const [prompt, setPrompt] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
+  const [isFetchingChats, setIsFetchingChats] = useState(false);
   const [showCopiedText, setCopiedText] = useState(false);
   const [isError, setIsError] = useState(false);
   const [chats, setChats] = useState<ChatProps[]>([
@@ -64,6 +66,7 @@ export default function CodeGeneration() {
     }
   };
   const fetchChats = async () => {
+
     try {
       const response = await fetch("https://genius-be.onrender.com/getChats", {
         method: "GET",
@@ -81,8 +84,12 @@ export default function CodeGeneration() {
       // Handle errors if needed
       console.error("Error fetching chats:", error);
     }
+    finally{
+      setIsFetchingChats(false)
+    }
   };
   useEffect(() => {
+    setIsFetchingChats(true)
     fetchChats();
   }, []);
 
@@ -96,14 +103,17 @@ export default function CodeGeneration() {
   return (
     <form onSubmit={handleSend}>
       <div className="flex flex-col  justify-between h-full w-[100vw] md:w-[80vw] p-5 py-7">
+      <div className="flex items-center  gap-2 text-slate-400">
+          <img src={logo} height={18} width={18} alt="Genius" />
+           <span> Generate or Translate code to another language</span>
+           {isFetchingChats && <span className="animate-spin"><CgSpinnerTwoAlt/></span>}
+           
+      </div>
         <div
           ref={chatContainerRef}
           className="w-full max-h-[70vh] overflow-y-auto"
         >
-          <p className="flex items-center  gap-2 text-slate-400">
-            <img src={logo} height={18} width={18} alt="Genius" />
-            Generate or Translate code to another language
-          </p>
+          
           <Chat chats={chats} isText setCopiedText={setCopiedText} />
 
           <Processing isProcessing={isProcessing} isError={isError} />

@@ -5,6 +5,7 @@ import SendButton from "../components/SendButton";
 import logo from "../assets/logo.png";
 import Processing from "../components/Processing";
 import Chat from "../components/Chat";
+import { CgSpinnerTwoAlt } from "react-icons/cg";
 
 interface ChatProps {
   user: string | null;
@@ -15,6 +16,7 @@ export default function Page() {
   const [prompt, setPrompt] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [isFetchingChats, setIsFetchingChats] = useState(false);
 
   const [chats, setChats] = useState<ChatProps[]>([
     {
@@ -81,8 +83,12 @@ export default function Page() {
       // Handle errors if needed
       console.error("Error fetching chats:", error);
     }
+    finally{
+      setIsFetchingChats(false)
+    }
   };
   useEffect(() => {
+    setIsFetchingChats(true)
     fetchChats();
   }, []);
 
@@ -100,10 +106,12 @@ export default function Page() {
           ref={chatContainerRef}
           className="w-full max-h-[70vh] overflow-y-auto"
         >
-          <p className="flex items-center  gap-2 text-slate-400">
-            <img src={logo} height={18} width={18} alt="Genius" />
-            Get any image with just a prompt !
-          </p>
+         <div className="flex items-center  gap-2 text-slate-400">
+          <img src={logo} height={18} width={18} alt="Genius" />
+           <span> Get any image with just a prompt</span>
+           {isFetchingChats && <span className="animate-spin"><CgSpinnerTwoAlt/></span>}
+           
+      </div>
           <Chat chats={chats} isText={false} />
           <Processing isProcessing={isProcessing} isError={isError} />
         </div>

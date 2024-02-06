@@ -22,7 +22,7 @@ export default function Chat({
         <div key={index} className="flex flex-col gap-4 mt-12">
           <>
             {chat.user && (
-              <p className="flex items-start gap-3 font-bold ">
+              <p className="flex items-start gap-3">
                 <FiUser size={18} />
                 {chat.user}
               </p>
