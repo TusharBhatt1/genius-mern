@@ -18,6 +18,8 @@ export default function Chat({
   setCopiedText=()=>{},
   isText,
 }: ChatWindowProps) {
+
+  if(chats.length===0) return <p className="text-slate-400 mt-7 text-xs">No chat here</p>
   return (
     <div className="flex flex-col">
       {chats.map((chat, index) => (
