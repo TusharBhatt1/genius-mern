@@ -101,7 +101,7 @@ export default function CodeGeneration() {
       <div className="flex flex-col  justify-between h-full w-[100vw] md:w-[80vw] p-5 py-7">
         <div className="flex items-center  gap-2 text-slate-400">
           <img src={logo} height={18} width={18} alt="Genius" />
-          <span> Generate or Translate code to another language</span>
+          <span> Generate or Translate code </span>
           {isFetchingChats && (
             <span className="animate-spin">
               <CgSpinnerTwoAlt size={18} />
