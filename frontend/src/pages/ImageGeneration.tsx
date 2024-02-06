@@ -90,7 +90,7 @@ export default function Page() {
       chatContainerRef.current.scrollTop =
         chatContainerRef.current.scrollHeight;
     }
-  }, [isProcessing, onAddImageChat]);
+  }, [isProcessing, onAddImageChat, allChats]);
 
   return (
     <form onSubmit={handleSend}>

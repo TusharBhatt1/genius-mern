@@ -94,7 +94,7 @@ export default function CodeGeneration() {
       chatContainerRef.current.scrollTop =
         chatContainerRef.current.scrollHeight;
     }
-  }, [isProcessing, onAddCodeChat]);
+  }, [isProcessing, onAddCodeChat , allChats]);
 
   return (
     <form onSubmit={handleSend}>
