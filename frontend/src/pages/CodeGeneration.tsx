@@ -77,7 +77,6 @@ export default function CodeGeneration() {
       console.error("Error fetching chats:", error);
     } finally {
       setIsFetchingChats(false);
-      setIsProcessing(false)
     }
   };
   useEffect(() => {
@@ -85,7 +84,6 @@ export default function CodeGeneration() {
       allChats.codeChats[0].user === null &&
       allChats.imageChats[0].user === null
     ) {
-      setIsProcessing(true)
       setIsFetchingChats(true);
       fetchChats();
     }
@@ -96,7 +94,7 @@ export default function CodeGeneration() {
       chatContainerRef.current.scrollTop =
         chatContainerRef.current.scrollHeight;
     }
-  }, [isProcessing, onAddCodeChat , allChats]);
+  }, [isProcessing, onAddCodeChat, allChats]);
 
   return (
     <form onSubmit={handleSend}>
@@ -120,7 +118,10 @@ export default function CodeGeneration() {
             setCopiedText={setCopiedText}
           />
 
-          <Processing isProcessing={isProcessing} isError={isError} />
+          <Processing
+            isProcessing={isProcessing && isFetchingChats}
+            isError={isError}
+          />
         </div>
         <div>
           {showCopiedText && (

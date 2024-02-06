@@ -76,7 +76,6 @@ export default function Page() {
       setIsError(true);
     } finally {
       setIsFetchingChats(false);
-      setIsProcessing(false)
     }
   };
   useEffect(() => {
@@ -84,7 +83,6 @@ export default function Page() {
       allChats.codeChats[0].user === null &&
       allChats.imageChats[0].user === null
     ) {
-      setIsProcessing(true)
       setIsFetchingChats(true);
       fetchChats();
     }
@@ -114,7 +112,10 @@ export default function Page() {
             )}
           </div>
           <Chat chats={allChats.imageChats} isText={false} />
-          <Processing isProcessing={isProcessing} isError={isError} />
+          <Processing
+            isProcessing={isProcessing && isFetchingChats}
+            isError={isError}
+          />
         </div>
 
         <InputSend
