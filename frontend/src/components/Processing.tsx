@@ -17,7 +17,7 @@ export default function Processing({isProcessing,isError}:{isProcessing:boolean,
           </span>
         </div>
       )}
-      {isError && <span className="text-red-500 text-xs mt-20">Knit API Internal Error , Kindly Retry</span>}
+      {isError && <span className="text-red-500 text-xs mt-20">Check Connection , Kindly Retry</span>}
       </>
   )
 }

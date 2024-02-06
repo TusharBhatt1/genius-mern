@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import Input from "../components/Input";
-import SendButton from "../components/SendButton";
 import logo from "../assets/logo.png";
 import Processing from "../components/Processing";
 import Chat from "../components/Chat";
 import { CgSpinnerTwoAlt } from "react-icons/cg";
+import useChats from "../hook/useChats";
+import InputSend from "../components/InputSend";
 
 export interface ChatProps {
   user: string | null;
@@ -17,12 +17,7 @@ export default function CodeGeneration() {
   const [isFetchingChats, setIsFetchingChats] = useState(false);
   const [showCopiedText, setCopiedText] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [chats, setChats] = useState<ChatProps[]>([
-    {
-      user: "",
-      genius: "",
-    },
-  ]);
+  const { allChats, OnSetAllChats, onAddCodeChat } = useChats();
 
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -32,10 +27,8 @@ export default function CodeGeneration() {
     setIsProcessing(true);
     setIsError(false);
 
-    let updatedChats: ChatProps[] = [...chats];
+    let updatedChats: ChatProps[] = [...allChats.codeChats];
     updatedChats = [...updatedChats, { user: prompt, genius: "" }];
-
-    setChats(updatedChats);
 
     setPrompt("");
 
@@ -55,7 +48,7 @@ export default function CodeGeneration() {
       const resultData = await response.json();
       updatedChats[updatedChats.length - 1].genius = resultData.responseText;
 
-      setChats(updatedChats);
+      onAddCodeChat(updatedChats);
     } catch (error) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore
@@ -66,7 +59,6 @@ export default function CodeGeneration() {
     }
   };
   const fetchChats = async () => {
-
     try {
       const response = await fetch("https://genius-be.onrender.com/getChats", {
         method: "GET",
@@ -79,18 +71,22 @@ export default function CodeGeneration() {
       const fetchedChats = await response.json();
 
       // Update the component state with the fetched chats
-      setChats(fetchedChats.codeChats);
+      OnSetAllChats(fetchedChats);
     } catch (error) {
       // Handle errors if needed
       console.error("Error fetching chats:", error);
-    }
-    finally{
-      setIsFetchingChats(false)
+    } finally {
+      setIsFetchingChats(false);
     }
   };
   useEffect(() => {
-    setIsFetchingChats(true)
-    fetchChats();
+    if (
+      allChats.codeChats[0].user === null &&
+      allChats.imageChats[0].user === null
+    ) {
+      setIsFetchingChats(true);
+      fetchChats();
+    }
   }, []);
 
   useEffect(() => {
@@ -98,23 +94,29 @@ export default function CodeGeneration() {
       chatContainerRef.current.scrollTop =
         chatContainerRef.current.scrollHeight;
     }
-  }, [chats]);
+  }, [isProcessing, onAddCodeChat]);
 
   return (
     <form onSubmit={handleSend}>
       <div className="flex flex-col  justify-between h-full w-[100vw] md:w-[80vw] p-5 py-7">
-      <div className="flex items-center  gap-2 text-slate-400">
+        <div className="flex items-center  gap-2 text-slate-400">
           <img src={logo} height={18} width={18} alt="Genius" />
-           <span> Generate or Translate code to another language</span>
-           {isFetchingChats && <span className="animate-spin"><CgSpinnerTwoAlt/></span>}
-           
-      </div>
+          <span> Generate or Translate code to another language</span>
+          {isFetchingChats && (
+            <span className="animate-spin">
+              <CgSpinnerTwoAlt />
+            </span>
+          )}
+        </div>
         <div
           ref={chatContainerRef}
           className="w-full max-h-[70vh] overflow-y-auto"
         >
-          
-          <Chat chats={chats} isText setCopiedText={setCopiedText} />
+          <Chat
+            chats={allChats.codeChats}
+            isText
+            setCopiedText={setCopiedText}
+          />
 
           <Processing isProcessing={isProcessing} isError={isError} />
         </div>
@@ -124,14 +126,12 @@ export default function CodeGeneration() {
               Copied!
             </span>
           )}
-          <div className="flex w-full">
-            <Input
-              value={prompt}
-              placeholder="custom hook in react"
-              onChange={(e) => setPrompt(e.target.value)}
-            />
-            <SendButton onClick={handleSend} disabled={prompt === ""} />
-          </div>
+          <InputSend
+            placeholder="custom hook in react"
+            prompt={prompt}
+            onClick={handleSend}
+            onChange={(e) => setPrompt(e.target.value)}
+          />
         </div>
       </div>
     </form>

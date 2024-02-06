@@ -9,7 +9,7 @@ export default function SendButton({ onClick, disabled }: ButtonProps) {
   return (
     <button
       type="submit"
-      className={`px-4 py-2 rounded-lg ${disabled ? "text-green-300" : "text-green-500 hover:bg-slate-100"}`}
+      className={`px-4 py-2 rounded-full ${disabled ? "text-green-300" : "text-green-500 hover:bg-slate-100"}`}
       onClick={onClick}
       disabled={disabled}
     >

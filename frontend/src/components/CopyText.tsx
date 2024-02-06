@@ -8,7 +8,8 @@ interface CopyTextProps{
     setCopiedText:(value:boolean)=>void
 }
 
-export default function CopyText({chat,setCopiedText}:CopyTextProps) {
+export default function 
+CopyText({chat,setCopiedText}:CopyTextProps) {
   return (
     <CopyToClipboard text={chat || ""}>
     <button

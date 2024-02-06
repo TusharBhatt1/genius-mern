@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import Input from "../components/Input";
-import SendButton from "../components/SendButton";
-
 import logo from "../assets/logo.png";
 import Processing from "../components/Processing";
 import Chat from "../components/Chat";
 import { CgSpinnerTwoAlt } from "react-icons/cg";
+import useChats from "../hook/useChats";
+import InputSend from "../components/InputSend";
 
 interface ChatProps {
   user: string | null;
@@ -17,13 +16,7 @@ export default function Page() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isFetchingChats, setIsFetchingChats] = useState(false);
-
-  const [chats, setChats] = useState<ChatProps[]>([
-    {
-      user: "",
-      genius: "",
-    },
-  ]);
+  const { allChats, onAddImageChat, OnSetAllChats } = useChats();
 
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -32,10 +25,10 @@ export default function Page() {
 
     setIsProcessing(true);
     setIsError(false);
-    let updatedChats: ChatProps[] = [...chats];
+    let updatedChats: ChatProps[] = [...allChats.imageChats];
     updatedChats = [...updatedChats, { user: prompt, genius: "" }];
 
-    setChats(updatedChats);
+    onAddImageChat(updatedChats);
 
     setPrompt("");
 
@@ -55,7 +48,7 @@ export default function Page() {
       const resultData = await response.json();
       updatedChats[updatedChats.length - 1].genius = resultData.url;
 
-      setChats(updatedChats);
+      onAddImageChat(updatedChats);
     } catch (error) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore
@@ -77,19 +70,19 @@ export default function Page() {
 
       const fetchedChats = await response.json();
 
-      // Update the component state with the fetched chats
-      setChats(fetchedChats.imageChats);
+      OnSetAllChats(fetchedChats);
     } catch (error) {
-      // Handle errors if needed
       console.error("Error fetching chats:", error);
-    }
-    finally{
-      setIsFetchingChats(false)
+      setIsError(true)
+    } finally {
+      setIsFetchingChats(false);
     }
   };
   useEffect(() => {
-    setIsFetchingChats(true)
-    fetchChats();
+    if(allChats.codeChats[0].user===null && allChats.imageChats[0].user===null){
+      setIsFetchingChats(true)
+      fetchChats();
+    }
   }, []);
 
   useEffect(() => {
@@ -97,7 +90,7 @@ export default function Page() {
       chatContainerRef.current.scrollTop =
         chatContainerRef.current.scrollHeight;
     }
-  }, [chats]);
+  }, [isProcessing, onAddImageChat]);
 
   return (
     <form onSubmit={handleSend}>
@@ -106,24 +99,25 @@ export default function Page() {
           ref={chatContainerRef}
           className="w-full max-h-[70vh] overflow-y-auto"
         >
-         <div className="flex items-center  gap-2 text-slate-400">
-          <img src={logo} height={18} width={18} alt="Genius" />
-           <span> Get any image with just a prompt</span>
-           {isFetchingChats && <span className="animate-spin"><CgSpinnerTwoAlt/></span>}
-           
-      </div>
-          <Chat chats={chats} isText={false} />
+          <div className="flex items-center   gap-2 text-slate-400">
+            <img src={logo} height={18} width={18} alt="Genius" />
+            <span> Get any image with just a prompt</span>
+            {isFetchingChats && (
+              <span className="animate-spin">
+                <CgSpinnerTwoAlt />
+              </span>
+            )}
+          </div>
+          <Chat chats={allChats.imageChats} isText={false} />
           <Processing isProcessing={isProcessing} isError={isError} />
         </div>
 
-        <div className="flex w-full">
-          <Input
-            value={prompt}
-            placeholder="a red color car"
+        <InputSend
+            placeholder="The Indian Flag"
+            prompt={prompt}
+            onClick={handleSend}
             onChange={(e) => setPrompt(e.target.value)}
           />
-          <SendButton onClick={handleSend} disabled={prompt === ""} />
-        </div>
       </div>
     </form>
   );
