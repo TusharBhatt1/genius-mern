@@ -77,6 +77,7 @@ export default function CodeGeneration() {
       console.error("Error fetching chats:", error);
     } finally {
       setIsFetchingChats(false);
+      setIsProcessing(false)
     }
   };
   useEffect(() => {
@@ -84,6 +85,7 @@ export default function CodeGeneration() {
       allChats.codeChats[0].user === null &&
       allChats.imageChats[0].user === null
     ) {
+      setIsProcessing(true)
       setIsFetchingChats(true);
       fetchChats();
     }

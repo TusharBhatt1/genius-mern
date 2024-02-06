@@ -14,7 +14,7 @@ onChange,
 onClick
 }:InputSendProps) {
   return (
-    <div className="flex w-full">
+    <div className="flex w-full mt-2">
     <Input
       value={prompt}
       placeholder={placeholder}

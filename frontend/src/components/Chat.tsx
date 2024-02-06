@@ -1,7 +1,9 @@
-import { FiEye, FiUser } from "react-icons/fi";
+import { FiEye } from "react-icons/fi";
 import { ChatProps } from "../pages/CodeGeneration";
 import logo from "../assets/logo.png";
 import CopyText from "./CopyText";
+import { FaUser } from "react-icons/fa";
+
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
 import Markdown from "https://esm.sh/react-markdown@9";
@@ -23,7 +25,7 @@ export default function Chat({
           <>
             {chat.user && (
               <p className="flex items-start gap-3">
-                <FiUser size={18} />
+                <FaUser size={18} />
                 {chat.user}
               </p>
             )}
@@ -35,8 +37,8 @@ export default function Chat({
                 <div className="flex gap-2 items-start">
                   <img src={logo} height={18} width={18} alt="Genius" />
                   <p className="flex flex-col gap-2">
-                    <span className="bg-slate-100 p-2 rounded-xl mr-4">
-                      <Markdown>{chat.genius}</Markdown>
+                    <span className="bg-slate-100 p-2 overflow-x-auto flex flex-wrap rounded-xl mr-4 px-1">
+                      <Markdown className="w-[70vw] flex flex-wrap">{chat.genius}</Markdown>
                     </span>
 
                     <CopyText

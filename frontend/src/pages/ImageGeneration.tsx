@@ -73,14 +73,19 @@ export default function Page() {
       OnSetAllChats(fetchedChats);
     } catch (error) {
       console.error("Error fetching chats:", error);
-      setIsError(true)
+      setIsError(true);
     } finally {
       setIsFetchingChats(false);
+      setIsProcessing(false)
     }
   };
   useEffect(() => {
-    if(allChats.codeChats[0].user===null && allChats.imageChats[0].user===null){
-      setIsFetchingChats(true)
+    if (
+      allChats.codeChats[0].user === null &&
+      allChats.imageChats[0].user === null
+    ) {
+      setIsProcessing(true)
+      setIsFetchingChats(true);
       fetchChats();
     }
   }, []);
@@ -97,7 +102,7 @@ export default function Page() {
       <div className="flex flex-col  justify-between h-full w-[100vw] md:w-[80vw] py-7 p-5">
         <div
           ref={chatContainerRef}
-          className="w-full max-h-[70vh] overflow-y-auto"
+          className="w-full max-h-[70vh] p-4 overflow-y-auto"
         >
           <div className="flex items-center   gap-2 text-slate-400">
             <img src={logo} height={18} width={18} alt="Genius" />
@@ -113,11 +118,11 @@ export default function Page() {
         </div>
 
         <InputSend
-            placeholder="The Indian Flag"
-            prompt={prompt}
-            onClick={handleSend}
-            onChange={(e) => setPrompt(e.target.value)}
-          />
+          placeholder="The Indian Flag"
+          prompt={prompt}
+          onClick={handleSend}
+          onChange={(e) => setPrompt(e.target.value)}
+        />
       </div>
     </form>
   );
