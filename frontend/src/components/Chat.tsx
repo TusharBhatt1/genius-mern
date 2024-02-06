@@ -21,7 +21,7 @@ export default function Chat({
 
   if(chats.length===0) return <p className="text-slate-400 mt-7 text-xs">No chat here</p>
   return (
-    <div className="flex flex-col w-full">
+    <div className="flex flex-col flex-wrap w-full">
       {chats.map((chat, index) => (
         <div key={index} className="flex flex-col gap-4 mt-12">
           <>
