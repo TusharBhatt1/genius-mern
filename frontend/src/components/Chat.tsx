@@ -21,7 +21,7 @@ export default function Chat({
 
   if(chats.length===0) return <p className="text-slate-400 mt-7 text-xs">No chat here</p>
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col w-full">
       {chats.map((chat, index) => (
         <div key={index} className="flex flex-col gap-4 mt-12">
           <>
@@ -36,11 +36,11 @@ export default function Chat({
           <>
             {chat.genius &&
               (isText ? (
-                <div className="flex gap-2 items-start">
+                <div className="flex w-full gap-2 items-start">
                   <img src={logo} height={18} width={18} alt="Genius" />
                   <p className="flex flex-col gap-2">
                     <span className="bg-slate-100 w-full p-2 flex flex-wrap rounded-xl mr-4 px-2">
-                      <Markdown className="max-w-full overflow-x-auto flex flex-col gap-1">{chat.genius}</Markdown>
+                      <Markdown className="max-w-[80vw] overflow-x-auto flex flex-col gap-1">{chat.genius}</Markdown>
                     </span>
 
                     <CopyText
