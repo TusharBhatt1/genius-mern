@@ -103,7 +103,7 @@ export default function CodeGeneration() {
           <img src={logo} height={18} width={18} alt="Genius" />
           <span> Generate or Translate code </span>
           {isFetchingChats && (
-            <span className="animate-spin">
+            <span className="animate-spin text-black">
               <CgSpinnerTwoAlt size={18} />
             </span>
           )}
