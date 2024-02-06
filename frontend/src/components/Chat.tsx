@@ -15,11 +15,11 @@ interface ChatWindowProps {
 }
 export default function Chat({
   chats,
-  setCopiedText=()=>{},
+  setCopiedText = () => {},
   isText,
 }: ChatWindowProps) {
-
-  if(chats.length===0) return <p className="text-slate-400 mt-7 text-xs">No chat here</p>
+  if (chats.length === 0)
+    return <p className="text-slate-400 mt-7 text-xs">No chat here</p>;
   return (
     <div className="flex flex-col flex-wrap w-full">
       {chats.map((chat, index) => (
@@ -39,8 +39,10 @@ export default function Chat({
                 <div className="flex w-full gap-2 items-start">
                   <img src={logo} height={18} width={18} alt="Genius" />
                   <p className="flex w-full flex-col gap-2">
-                    <span className="bg-slate-100 w-full p-2 flex flex-wrap rounded-xl mr-4 px-2">
-                      <Markdown className="max-w-[82vw] overflow-x-auto gap-1">{chat.genius}</Markdown>
+                    <span className="bg-slate-100  p-2  rounded-xl mr-4 px-2">
+                      <Markdown className="max-w-[82vw] overflow-x-auto flex flex-col gap-1">
+                        {chat.genius}
+                      </Markdown>
                     </span>
 
                     <CopyText
