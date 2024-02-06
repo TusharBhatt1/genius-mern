@@ -39,7 +39,7 @@ export default function Chat({
                 <div className="flex gap-2 items-start">
                   <img src={logo} height={18} width={18} alt="Genius" />
                   <p className="flex flex-col gap-2">
-                    <span className="bg-slate-100 w-full p-2 flex flex-wrap rounded-xl mr-4 px-1">
+                    <span className="bg-slate-100 w-full p-2 flex flex-wrap rounded-xl mr-4 px-2">
                       <Markdown className="max-w-[80vw] overflow-x-auto flex flex-col gap-1">{chat.genius}</Markdown>
                     </span>
 
