@@ -98,7 +98,7 @@ export default function CodeGeneration() {
 
   return (
     <form onSubmit={handleSend}>
-      <div className="flex flex-col  justify-between h-[90vh] overflow-hidden w-[100vw] md:w-[80vw] p-5 py-7">
+      <div className="flex flex-col  justify-between h-[85vh] md:h-full overflow-hidden w-[100vw] md:w-[80vw] p-5 py-7">
         <div className="flex items-center  gap-2 text-slate-400">
           <img src={logo} height={18} width={18} alt="Genius" />
           <span> Generate or Translate code </span>
