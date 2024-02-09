@@ -22,7 +22,6 @@ export default function Page() {
 
   const handleSend = async (e: React.FormEvent) => {
     e.preventDefault();
-
     setIsProcessing(true);
     setIsError(false);
     let updatedChats: ChatProps[] = [...allChats.imageChats];
