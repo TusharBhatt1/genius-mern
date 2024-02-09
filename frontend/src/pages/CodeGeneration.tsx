@@ -28,6 +28,7 @@ export default function CodeGeneration() {
     setIsError(false);
 
     let updatedChats: ChatProps[] = [...allChats.codeChats];
+    allChats.codeChats=[...allChats.codeChats,{ user: prompt, genius: "" }]
     updatedChats = [...updatedChats, { user: prompt, genius: "" }];
 
     setPrompt("");
@@ -46,6 +47,10 @@ export default function CodeGeneration() {
       }
 
       const resultData = await response.json();
+      if (resultData.success === false) {
+        alert("API LIMIT EXCEEDED");
+        return;
+      }
       updatedChats[updatedChats.length - 1].genius = resultData.responseText;
 
       onAddCodeChat(updatedChats);
@@ -119,7 +124,7 @@ export default function CodeGeneration() {
           />
 
           <Processing
-            isProcessing={isProcessing && isFetchingChats}
+            isProcessing={isProcessing}
             isError={isError}
           />
         </div>

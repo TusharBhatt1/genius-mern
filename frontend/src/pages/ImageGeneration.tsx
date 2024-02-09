@@ -26,6 +26,7 @@ export default function Page() {
     setIsProcessing(true);
     setIsError(false);
     let updatedChats: ChatProps[] = [...allChats.imageChats];
+    allChats.imageChats=[...allChats.imageChats,{ user: prompt, genius: "" }]
     updatedChats = [...updatedChats, { user: prompt, genius: "" }];
 
     onAddImageChat(updatedChats);
@@ -47,7 +48,7 @@ export default function Page() {
 
       const resultData = await response.json();
       updatedChats[updatedChats.length - 1].genius = resultData.url;
-
+      
       onAddImageChat(updatedChats);
     } catch (error) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -113,7 +114,7 @@ export default function Page() {
           </div>
           <Chat chats={allChats.imageChats} isText={false} />
           <Processing
-            isProcessing={isProcessing && isFetchingChats}
+            isProcessing={isProcessing}
             isError={isError}
           />
         </div>
