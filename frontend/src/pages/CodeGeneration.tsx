@@ -13,7 +13,7 @@ export interface ChatProps {
 
 export default function CodeGeneration() {
   const [prompt, setPrompt] = useState("");
-  const [isProcessing, setIsProcessing] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(true);
   const [isFetchingChats, setIsFetchingChats] = useState(false);
   const [showCopiedText, setCopiedText] = useState(false);
   const [isError, setIsError] = useState(false);
