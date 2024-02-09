@@ -6,10 +6,6 @@ import { CgSpinnerTwoAlt } from "react-icons/cg";
 import useChats from "../hook/useChats";
 import InputSend from "../components/InputSend";
 
-interface ChatProps {
-  user: string | null;
-  genius: string | null;
-}
 
 export default function Page() {
   const [prompt, setPrompt] = useState("");
@@ -24,11 +20,10 @@ export default function Page() {
     e.preventDefault();
     setIsProcessing(true);
     setIsError(false);
-    let updatedChats: ChatProps[] = [...allChats.imageChats];
+   
     allChats.imageChats=[...allChats.imageChats,{ user: prompt, genius: "" }]
-    updatedChats = [...updatedChats, { user: prompt, genius: "" }];
-
-    onAddImageChat(updatedChats);
+   
+    onAddImageChat(allChats.imageChats);
 
     setPrompt("");
 
@@ -46,9 +41,9 @@ export default function Page() {
       }
 
       const resultData = await response.json();
-      updatedChats[updatedChats.length - 1].genius = resultData.url;
+      allChats.imageChats[allChats.imageChats.length - 1].genius = resultData.url;
       
-      onAddImageChat(updatedChats);
+      onAddImageChat(allChats.imageChats);
     } catch (error) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore

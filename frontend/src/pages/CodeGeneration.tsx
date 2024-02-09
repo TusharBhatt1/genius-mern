@@ -27,9 +27,7 @@ export default function CodeGeneration() {
     setIsProcessing(true);
     setIsError(false);
 
-    let updatedChats: ChatProps[] = [...allChats.codeChats];
-    allChats.codeChats=[...allChats.codeChats,{ user: prompt, genius: "" }]
-    updatedChats = [...updatedChats, { user: prompt, genius: "" }];
+    allChats.codeChats = [...allChats.codeChats, { user: prompt, genius: "" }];
 
     setPrompt("");
 
@@ -51,9 +49,10 @@ export default function CodeGeneration() {
         alert("API LIMIT EXCEEDED");
         return;
       }
-      updatedChats[updatedChats.length - 1].genius = resultData.responseText;
+      allChats.codeChats[allChats.codeChats.length - 1].genius =
+        resultData.responseText;
 
-      onAddCodeChat(updatedChats);
+      onAddCodeChat(allChats.codeChats);
     } catch (error) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore
@@ -123,10 +122,7 @@ export default function CodeGeneration() {
             setCopiedText={setCopiedText}
           />
 
-          <Processing
-            isProcessing={isProcessing}
-            isError={isError}
-          />
+          <Processing isProcessing={isProcessing} isError={isError} />
         </div>
         <div>
           {showCopiedText && (
